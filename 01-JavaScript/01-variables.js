@@ -83,17 +83,65 @@ const alex = {
         color: 'azul',
         talla: 40
     },
-    mascotas: ['gato','perro','paloma']
+    mascotas: ['gato', 'perro', 'paloma']
 }; // object
 
-// Acceder a los objecto
+// Acceder a las propiedades del objecto
 alex.nombre; // "Alex"
-alex.apellido; // "Alex"
-
-const arregloNumeros = []; // object
+alex.apellido; // "Arevalo"
+alex["nombre"]; //Alex
 
 console.log(alex);
-console.log(arregloNumeros);
+alex.nombre = "Marcelo";
+console.log(alex);
+alex["nombre"] = "Alex";
+console.log(alex);
+
+alex.sueldo = 1.2;
+console.log(alex.sueldo); // 1.2
+
+
+console.log(Object.values(alex)); //Solo iguala la llave a undefined
+delete alex.nombre; //Elimina la llave nombre
+
+// Clase Object
+console.log(Object.values(alex));
+
+//Lista de variables por valor en JS
+//number
+//string
+//boolean
+//undefined
+
+let edadAlex = 22;
+let edadMarcelo = edadAlex;
+
+console.log(edadAlex); // 22
+console.log(edadMarcelo); // 22
+
+edadAlex = edadAlex + 1;
+console.log(edadAlex); // 23
+console.log(edadMarcelo); // 23
+
+// Lista de variables por REFERENCIA en JS
+let rafael = {
+    nombre: "Rafael",
+};
+let lennin = Object.assign({}, rafael); // Creamos un objeto por valor con assing
+
+console.log(rafael); // Rafael
+console.log(lennin); // Rafael
+lennin.nombre = "Lennin";
+delete rafael.nombre;
+console.log(rafael); // {}
+console.log(lennin); // Lennin
+
+
+
+/* const arregloNumeros = []; // object
+
+console.log(alex);
+console.log(arregloNumeros); */
 
 
 
