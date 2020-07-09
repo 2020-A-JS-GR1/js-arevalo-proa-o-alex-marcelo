@@ -1,4 +1,0 @@
-Error: ENOENT: no such file or directory, open 'C:\Users\USUARIO\Desktop\Usuario\Ing. Sistemas\8vo\JavaScript\Repositorios\js-arevalo-proa-o-alex-marcelo\Deberes\06-ejemplo.txt'
-Buenas Noches
-Buenas Noches
-Buenas Noches
