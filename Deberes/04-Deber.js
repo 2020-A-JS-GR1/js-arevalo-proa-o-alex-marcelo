@@ -12,7 +12,7 @@ const opciones = [
     'Crear producto',
     'Actualizar producto',
     'Eliminar producto',
-    'Salir'
+    'Tiendas'
 ];
 
 function leerArchivo(tienda) {
@@ -58,7 +58,8 @@ async function verProductos(tienda) {
         const productos = await leerArchivo(tienda);
         console.log('\n');
         console.table(JSON.parse(productos));
-        console.log('\n\n\n\n');
+        console.log('\n\n\n');
+        return productos;
     } catch (e) {
         console.log(e);
     }
@@ -67,6 +68,8 @@ async function verProductos(tienda) {
 async function crearProducto(tienda) {
     try {
         const productos = await leerArchivo(tienda);
+        const nuevosProductos = JSON.parse(productos);
+
         const respuesta = await inquirer.prompt([
             {
                 type: 'input',
@@ -90,18 +93,112 @@ async function crearProducto(tienda) {
                 choices: ['SI', 'NO']
             },
         ]);
-        respuesta.conservantes === 'SI' ? respuesta.conservantes = true : respuesta.conservantes = false;
 
-        const nuevosProductos = JSON.parse(productos);
+        respuesta.conservantes === 'SI' ? respuesta.conservantes = true : respuesta.conservantes = false;
         nuevosProductos.push(respuesta);
 
         await escribirArchivo(tienda, JSON.stringify(nuevosProductos));
-        verProductos(tienda);
+        await verProductos(tienda);
+        console.log('Producto creado exitosamente!!!');
     } catch (e) {
         console.log(e);
     }
 }
 
+async function eliminarProducto(tienda) {
+    try {
+        let productos = await verProductos(tienda);
+        productos = JSON.parse(productos);
+
+        const respuesta = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'nombre',
+                message: 'Ingrese nombre del producto que desea eliminar>'
+            }
+        ]);
+
+        const indice = productos.findIndex((producto) => producto.nombre === respuesta.nombre);
+
+        if (indice !== -1) {
+            productos.splice(indice, 1);
+            await escribirArchivo(tienda, JSON.stringify(productos));
+            await verProductos(tienda);
+            console.log('Producto eliminado exitosamente!!!');
+        } else {
+            console.log('No se ha podido encontrar el producto> ' + respuesta.nombre);
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+async function actualizarProducto(tienda) {
+    try {
+        let productos = await verProductos(tienda);
+        productos = JSON.parse(productos);
+
+        const resNombre = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'nombre',
+                message: 'Ingrese nombre del producto que desea actualizar>'
+            }
+        ]);
+
+        const productoAc = productos.find((producto) => producto.nombre === resNombre.nombre);
+        const indice = productos.findIndex((producto) => producto.nombre === resNombre.nombre);
+
+        if (productoAc) {
+            const respuesta = await inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'nombre',
+                    message: 'Ingrese nombre del producto>',
+                    default: function () {
+                        return productoAc.nombre;
+                    },
+                },
+                {
+                    type: 'number',
+                    name: 'cantidad',
+                    message: 'Ingrese cantidad del producto>',
+                    default: function () {
+                        return productoAc.cantidad;
+                    },
+                },
+                {
+                    type: 'number',
+                    name: 'precio',
+                    message: 'Ingrese precio del producto>',
+                    default: function () {
+                        return productoAc.precio;
+                    },
+                },
+                {
+                    type: 'list',
+                    name: 'conservantes',
+                    message: 'Tiene conservantes?>',
+                    choices: ['SI', 'NO'],
+                    default: function () {
+                        return productoAc.conservantes === true ? 'SI' : 'NO'
+                    }
+                },
+            ]);
+
+            respuesta.conservantes === 'SI' ? respuesta.conservantes = true : respuesta.conservantes = false;
+            productos[indice] = respuesta;
+
+            await escribirArchivo(tienda, JSON.stringify(productos));
+            await verProductos(tienda);
+            console.log('Producto actualizado exitosamente!!!');
+        } else {
+            console.log('No se ha podido encontrar el producto> ' + resNombre.nombre)
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 function crud(tienda) {
     inquirer.prompt([{
@@ -113,16 +210,24 @@ function crud(tienda) {
         if (res.opcion !== opciones[4]) {
             switch (String(res.opcion)) {
                 case opciones[0]:
-                    verProductos(tienda);
+                    verProductos(tienda).then(() => {
+                        crud(tienda)
+                    });
                     break;
                 case opciones[1]:
-                    crearProducto(tienda);
+                    crearProducto(tienda).then(() => {
+                        crud(tienda)
+                    });
                     break;
                 case opciones[2]:
-                    console.log('Actualizar');
+                    actualizarProducto(tienda).then(() => {
+                        crud(tienda);
+                    })
                     break;
                 case opciones[3]:
-                    console.log('Eliminar');
+                    eliminarProducto(tienda).then(() => {
+                        crud(tienda)
+                    })
                     break;
                 default:
                     console.log('Ver');
