@@ -1,0 +1,14 @@
+let nombre = 'Alex';
+// nombre = 1;
+nombre = 'Marcelo';
+let edad = 31;
+let casado = true;
+let fecha = new Date();
+let marihuana = 2;
+marihuana = '2';
+marihuana = true;
+marihuana = () => 2;
+let edadMultiple = 2;
+edadMultiple = '2';
+edadMultiple = 25;
+edadMultiple = 'dos';
