@@ -17,11 +17,11 @@ const opciones = [
 
 function leerArchivo(tienda) {
 
-    const resultado = new Promise( // Definicion de la promesa
+    const resultado = new Promise(
         (resolve, reject) => {
-            fs.readFile( // ASINCRONA
+            fs.readFile(
                 tienda === tiendas[0] ? './tienda1.txt' : './tienda2.txt', 'utf-8',
-                (error, contenido) => { // CALLBACK
+                (error, contenido) => {
                     if (error) {
                         resolve(error);
                     } else {
@@ -36,10 +36,10 @@ function leerArchivo(tienda) {
 
 function escribirArchivo(tienda, contenido) {
 
-    const resultado = new Promise( // Definicion de la promesa
+    const resultado = new Promise(
         (resolve, reject) => {
             fs.writeFile(tienda === tiendas[0] ? './tienda1.txt' : './tienda2.txt', contenido, 'utf-8',
-                (error) => { // CALLBACK
+                (error) => {
                     if (error) {
                         resolve(error);
                     } else {
