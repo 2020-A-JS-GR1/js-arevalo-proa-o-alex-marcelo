@@ -1,0 +1,1 @@
+[{"nombre":"cebolla","cantidad":50,"precio":0.5,"conservantes":false},{"nombre":"remolacha","cantidad":20,"precio":1,"conservantes":false},{"nombre":"aguacate","cantidad":30,"precio":1.5,"conservantes":true},{"nombre":"frutilla","cantidad":20,"precio":1.75,"conservantes":false},{"nombre":"piña","cantidad":19,"precio":2.3,"conservantes":false}]
