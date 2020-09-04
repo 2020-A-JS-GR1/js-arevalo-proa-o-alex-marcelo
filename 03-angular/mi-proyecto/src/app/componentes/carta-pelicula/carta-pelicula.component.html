@@ -1,14 +1,15 @@
 <!-- Property Binding -->
 <!-- Debe de ser utilizado para setear valores a una etiqueta -->
 <img
-  [src]="urlEjemploImagen"
-  alt="">
+  [src]="urlImagen"
+  (click)="eventoEjecutarDioClicImagen()"
+  alt="" width="250" height="350">
 
 <!-- interpolacion -->
-<a [href]="urlEjemplo" target="_blank"><p>{{textoEjemplo}}</p></a>
-
+<a href="https://www.google.com" target="_blank"><p>{{descripcion}}</p></a>
 <!-- Event Binding -->
 <button
-  (click)="ejemploFunction()"
+  (click)="eventoEjecutarDioClic()"
   (blur)="eventoOnBlur()"
->Evento</button>
+>{{nombreBoton}}</button>
+

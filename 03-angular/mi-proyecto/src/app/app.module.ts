@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartaPeliculaComponent } from './componentes/carta-pelicula/carta-pelicula.component';
+import {HttpClientModule} from "@angular/common/http";
+import {UsuarioServices} from "./servicios/usuario.services";
 
 @NgModule({
   declarations: [
@@ -12,9 +14,12 @@ import { CartaPeliculaComponent } from './componentes/carta-pelicula/carta-pelic
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule // Importa el http client
   ],
-  providers: [],
+  providers: [
+    UsuarioServices
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

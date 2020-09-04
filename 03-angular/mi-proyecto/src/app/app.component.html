@@ -1,2 +1,13 @@
 <h1>Lista de peliculas</h1>
-<app-carta-pelicula></app-carta-pelicula>
+<p *ngIf="true">OCULTO</p>
+<!-- Directivas -->
+<div *ngFor="let pelicula of arregloPeliculas">
+  <app-carta-pelicula
+    [urlImagen]="pelicula.url"
+    [descripcion]="pelicula.descripcion"
+    [nombreBoton]="pelicula.nombrePelicula"
+    (eventoDioClicEnBoton)="mensajeconsola($event)"
+    (eventoDioClicEnImagen)="mensajeconsola($event)"
+  >
+  </app-carta-pelicula>
+</div>
