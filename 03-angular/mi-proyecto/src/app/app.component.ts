@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsuarioServices} from "./servicios/usuario.services";
 
 @Component({
@@ -6,7 +6,7 @@ import {UsuarioServices} from "./servicios/usuario.services";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'mi-proyecto';
   arregloNumeros = [1, 2, 3];
   arregloPeliculas = [
@@ -41,6 +41,9 @@ export class AppComponent {
       nombrePelicula: 'Avengers',
     }
   ]
+  arregloUsuarios = [];
+  arregloObservables = [];
+  habilitado = true;
 
   constructor(private readonly _usuarioService: UsuarioServices) {
   }
@@ -48,15 +51,41 @@ export class AppComponent {
   mensajeconsola(objeto: boolean) {
     console.log('Llego el evento', objeto);
     const observableTraerTodos = this._usuarioService.traerTodos();
+
     observableTraerTodos.subscribe(
-      (data)=>{ //Try
+      (data) => {//Try
+        this.arregloUsuarios = data as any[];
         console.log(data)
       },
-      (error)=>{ //Catch
+      (error) => { //Catch
         console.log(error)
       }
-    )
+    );
+    this.arregloObservables.push(observableTraerTodos);
+  }
 
+  mensajeCrearUsuario() {
+    const usuarioNuevo = {
+      cedula: "1234657981232",
+      nombre: "Naruto",
+      apellido: "uzumaki",
+    }
+
+    const obsCrearUsuario = this._usuarioService.crear(usuarioNuevo);
+
+    obsCrearUsuario.subscribe(
+      (datos) => {
+        console.log('Nuevo Usuario', datos);
+        this.mensajeconsola(true);
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+
+  ngOnInit(): void {
+    this.mensajeconsola(true);
   }
 
 }
