@@ -6,11 +6,17 @@ import { AppComponent } from './app.component';
 import { CartaPeliculaComponent } from './componentes/carta-pelicula/carta-pelicula.component';
 import {HttpClientModule} from "@angular/common/http";
 import {UsuarioServices} from "./servicios/usuario.services";
+import { RutaLogInComponent } from './rutas/ruta-log-in/ruta-log-in.component';
+import { RutaInicioComponent } from './rutas/ruta-inicio/ruta-inicio.component';
+import { RutaDetalleUsuarioComponent } from './rutas/ruta-detalle-usuario/ruta-detalle-usuario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CartaPeliculaComponent
+    CartaPeliculaComponent,
+    RutaLogInComponent,
+    RutaInicioComponent,
+    RutaDetalleUsuarioComponent
   ],
   imports: [
     BrowserModule,
