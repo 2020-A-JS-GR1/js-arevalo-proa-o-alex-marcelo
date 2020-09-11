@@ -14,11 +14,11 @@
 
 <!--<button (click)="mensajeCrearUsuario()">Crear Usuario</button>-->
 <!--<button (click)="habilitado = !habilitado">{{habilitado ? 'Habilitado' : 'Deshabilitado'}}</button>-->
-<!--<app-carta-pelicula *ngIf="habilitado"></app-carta-pelicula>-->
+<!--<app-carta-pelicula></app-carta-pelicula>-->
 
-<div *ngFor="let usuario of arregloUsuarios">
-  <p>{{usuario.nombre}}</p>
-</div>
+<!--<div *ngFor="let usuario of arregloUsuarios">-->
+<!--  <p>{{usuario.nombre}}</p>-->
+<!--</div>-->
 <ul>
   <li>
     <a [routerLink]="['inicio']">
@@ -28,6 +28,11 @@
   <li>
     <a [routerLink]="['login']">
       Ir Login
+    </a>
+  </li>
+  <li>
+    <a [routerLink]="['usuario']">
+      Usuarios
     </a>
   </li>
 </ul>
