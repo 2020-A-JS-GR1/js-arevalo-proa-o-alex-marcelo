@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core'
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 // @ts-ignore
@@ -11,8 +11,8 @@ export class UsuarioServices {
   ) {
   }
 
-  traerTodos() {
-    return this._httpClient.get(this.url + '/Usuario')
+  traerTodos(consulta?: string) {
+    return this._httpClient.get(this.url + '/Usuario?' + consulta)
   }
 
   crear(usuario) {
@@ -23,7 +23,14 @@ export class UsuarioServices {
     return this._httpClient.get(this.url + '/Usuario/' + idUsuario)
   }
 
-  eliminar(idUsuario: number){
+  eliminar(idUsuario: number) {
     return this._httpClient.delete(this.url + '/Usuario/' + idUsuario)
+  }
+
+  editar(usuario, id) {
+    return this._httpClient.put(
+      this.url + '/Usuario/' + id,
+      usuario
+    )
   }
 }

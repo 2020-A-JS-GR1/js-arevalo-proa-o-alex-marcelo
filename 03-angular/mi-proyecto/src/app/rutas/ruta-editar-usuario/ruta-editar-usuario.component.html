@@ -1,3 +1,12 @@
 <p>{{usuario?.id}}</p>
 <p>{{usuario?.nombre}}</p>
 <p>{{usuario?.cedula}}</p>
+
+<div *ngIf="mostrarFormulario">
+  <app-formulari-usuario
+    [nombreInput]="usuario.nombre"
+    [cedulaInput]="usuario.cedula"
+    [estadoCivilInput]="usuario.estadoCivil"
+    (informacionValida)="editarUsuario($event)"
+  ></app-formulari-usuario>
+</div>

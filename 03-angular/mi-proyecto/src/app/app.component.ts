@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UsuarioServices} from "./servicios/usuario.services";
+import {UsuarioServices} from './servicios/usuario.services';
+import {AuthService} from './servicios/auth/auth.service';
 
 @Component({
   selector: 'app-nueva',
@@ -45,7 +46,10 @@ export class AppComponent implements OnInit {
   arregloObservables = [];
   habilitado = true;
 
-  constructor(private readonly _usuarioService: UsuarioServices) {
+  constructor(
+    private readonly _usuarioService: UsuarioServices,
+    private readonly _authService: AuthService
+  ) {
   }
 
   mensajeconsola(objeto: boolean) {
@@ -66,9 +70,9 @@ export class AppComponent implements OnInit {
 
   mensajeCrearUsuario() {
     const usuarioNuevo = {
-      cedula: "1234657981232",
-      nombre: "Naruto",
-      apellido: "uzumaki",
+      cedula: '1234657981232',
+      nombre: 'Naruto',
+      apellido: 'uzumaki',
     }
 
     const obsCrearUsuario = this._usuarioService.crear(usuarioNuevo);
