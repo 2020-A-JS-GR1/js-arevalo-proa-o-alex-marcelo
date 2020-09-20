@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UsuarioServices} from "../../servicios/usuario.services";
-import {Router} from "@angular/router";
+import {UsuarioServices} from '../../servicios/usuario.services';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ruta-lista-usuario',
@@ -9,20 +9,13 @@ import {Router} from "@angular/router";
 })
 export class RutaListaUsuarioComponent implements OnInit {
   arregloUsuario = [];
+  busquedaModelo = '';
+
 
   constructor(private readonly _usuarioService: UsuarioServices, private readonly _router: Router) {
   }
 
   ngOnInit(): void {
-    const observableTraerTodos = this._usuarioService.traerTodos();
-    observableTraerTodos.subscribe(
-      (usuario: any[]) => {
-        this.arregloUsuario = usuario;
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
   }
 
   irAEditarUsuario(id: number) {
@@ -41,6 +34,34 @@ export class RutaListaUsuarioComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+      }
+    )
+  }
+
+  filtrarArreglo() {
+    const consulta = {
+      or: [
+        {
+          nombre: {
+            contains: this.busquedaModelo
+          }
+        },
+        {
+          cedula: {
+            contains: this.busquedaModelo
+          }
+        },
+      ]
+    };
+    const consultaString = 'where=' + JSON.stringify(consulta);
+    const observableTraerTodos = this._usuarioService.
+    traerTodos(this.busquedaModelo != '' ? consultaString : '');
+    observableTraerTodos.subscribe(
+      (usuario: any[]) => {
+        this.arregloUsuario = usuario;
+      },
+      (error) => {
+        console.log(error);
       }
     )
   }
