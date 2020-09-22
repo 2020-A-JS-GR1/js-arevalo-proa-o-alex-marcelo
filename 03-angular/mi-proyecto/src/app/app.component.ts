@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly _usuarioService: UsuarioServices,
-    private readonly _authService: AuthService
+    public _authService: AuthService
   ) {
   }
 
