@@ -43,7 +43,7 @@ export class TablaProductosComponent implements OnInit {
   }
 
   formatconservante(conservante) {
-    return conservante === 'true' ? 'si' : 'no';
+    return conservante === true ? 'si' : 'no';
   }
 
   productosFireBase(id: number) {
