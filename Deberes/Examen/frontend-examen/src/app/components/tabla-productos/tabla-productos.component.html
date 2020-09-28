@@ -1,0 +1,24 @@
+<table class="table text-center">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Nombre</th>
+    <th scope="col">Cantidad</th>
+    <th scope="col">Precio</th>
+    <th scope="col">Conservantes</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let producto of productos">
+    <td>{{producto.data().nombre}}</td>
+    <td>{{producto.data().cantidad}}</td>
+    <td>{{producto.data().precio}}</td>
+    <td>{{formatconservante(producto.data().conservante)}}</td>
+    <td>
+      <button class="btn btn-primary mr-2" (click)="irAEditarProducto(producto.id)">Editar</button>
+      <button class="btn btn-danger" (click)="eliminarProducto(producto.id)">Eliminar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

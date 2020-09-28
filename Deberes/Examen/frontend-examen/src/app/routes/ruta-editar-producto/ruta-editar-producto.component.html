@@ -1,0 +1,9 @@
+<ng-container *ngIf="mostrarFormulario">
+  <app-formulario-producto
+    [nombreInput]="producto.data().nombre"
+    [cantidadInput]="producto.data().cantidad"
+    [precioInput]="producto.data().precio"
+    [conservanteInput]="producto.data().conservante"
+    (informacionValida)="editarProducto($event)"
+  ></app-formulario-producto>
+</ng-container>
