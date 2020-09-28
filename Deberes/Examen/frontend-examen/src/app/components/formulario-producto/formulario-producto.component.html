@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="col-6 mx-auto pt-3">
+    <form #formularioProducto="ngForm" (ngSubmit)="crearProducto(formularioProducto)">
+      <div class="form-group">
+        <label for="nombreId">Nombre Producto</label>&nbsp;&nbsp;
+        <input id="nombreId"
+               class="form-control"
+               type="text"
+               name="nombre"
+               [(ngModel)]="nombreModelo"
+               required
+        >
+      </div>
+      <div class="form-group">
+        <label for="cantidadId">Cantidad Producto</label>&nbsp;&nbsp;
+        <input id="cantidadId"
+               class="form-control"
+               type="number"
+               name="cantidad"
+               [(ngModel)]="cantidadModelo"
+               required
+        >
+      </div>
+      <div class="form-group">
+        <label for="precioId">Precio Producto</label>&nbsp;&nbsp;
+        <input id="precioId"
+               class="form-control"
+               type="number"
+               name="precio"
+               [(ngModel)]="precioModelo"
+               required
+        >
+      </div>
+      <div class="form-group">
+        <label for="conservanteId">Conservantes</label>&nbsp;&nbsp;
+        <select name="conservante" id="conservanteId" class="form-control" [(ngModel)]="conservanteModelo" required>
+          <option disabled selected>Seleccione una opción</option>
+          <option value="true">Si</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+      <br>
+      <button class="btn btn-primary btn-block mb-2" type="submit" [disabled]="!formularioProducto.form.valid">Aceptar</button>
+      <button class="btn btn-secondary btn-block" type="reset">Reset</button>&nbsp;&nbsp;
+    </form>
+  </div>
+</div>
